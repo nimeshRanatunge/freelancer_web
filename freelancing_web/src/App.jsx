@@ -64,6 +64,7 @@ function App() {
         },
       ],
     },
+    // to following ones it does not append navbar and footer (u can see they are not children)
     {
       path: "/register",
       element: <Register />,
