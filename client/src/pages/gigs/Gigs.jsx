@@ -6,6 +6,7 @@ import GigCard from "../../components/gigCard/GigCard";
 function Gigs() {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
+
   const minRef = useRef();
   const maxRef = useRef();
 
@@ -36,10 +37,13 @@ function Gigs() {
           </div>
           <div className="right">
             <span className="sortBy">Sort by</span>
+
             <span className="sortType">
               {sort === "sales" ? "Best Selling" : "Newest"}
             </span>
+
             <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
+
             {open && (
               <div className="rightMenu">
                 {sort === "sales" ? (
@@ -50,6 +54,7 @@ function Gigs() {
                   <span onClick={() => reSort("sales")}>Popular</span>
               </div>
             )}
+            
           </div>
         </div>
         <div className="cards">
