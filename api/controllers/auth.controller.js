@@ -5,13 +5,20 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   try {
+    // 5 - salt number
     const hash = bcrypt.hashSync(req.body.password, 5);
-    const newUser = new User({
-      ...req.body,
-      password: hash,
-    });
+
+    const newUser = new User(
+      // send as json
+      {
+        // spread operator
+        ...req.body,
+        password: hash,
+      }
+    );
 
     await newUser.save();
+    // successfully created 201
     res.status(201).send("User has been created.");
   } catch (err) {
     next(err);
@@ -19,6 +26,7 @@ export const register = async (req, res, next) => {
 };
 export const login = async (req, res, next) => {
   try {
+    // find one user, because its a unique user
     const user = await User.findOne({ username: req.body.username });
 
     if (!user) return next(createError(404, "User not found!"));
@@ -35,7 +43,8 @@ export const login = async (req, res, next) => {
       process.env.JWT_KEY
     );
 
-    const { password, ...info } = user._doc;
+    //prevent sending password in response object, get password outside of the object
+    const { password, ...info } = user._doc; //prevent res inside _doc field
     res
       .cookie("accessToken", token, {
         httpOnly: true,

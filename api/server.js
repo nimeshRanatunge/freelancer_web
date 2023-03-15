@@ -25,6 +25,8 @@ const connect = async () => {
 };
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+// allow application to accept inputs, unless will give when tryng to input using post
 app.use(express.json());
 app.use(cookieParser());
 
