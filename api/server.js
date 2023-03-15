@@ -26,10 +26,13 @@ const connect = async () => {
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
-// allow application to accept inputs, unless will give when tryng to input using post
+// allow application to accept inputs, unless will give errors when tryng to input using post
 app.use(express.json());
+
+//using coockies we can react that information everywhere in our application
 app.use(cookieParser());
 
+// / attach the router to our main Express app
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/gigs", gigRoute);

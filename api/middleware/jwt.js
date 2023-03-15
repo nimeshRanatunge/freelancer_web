@@ -10,6 +10,9 @@ export const verifyToken = (req, res, next) => {
     if (err) return next(createError(403,"Token is not valid!"))
     req.userId = payload.id;
     req.isSeller = payload.isSeller;
+    // if we dont use next , it wont go to next function, example: in delete
+    // router.delete("/:id", verifyToken, deleteUser); wont go to deleteUser 
+    //after verfyToken
     next()
   });
 };

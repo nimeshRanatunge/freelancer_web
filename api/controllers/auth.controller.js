@@ -24,9 +24,11 @@ export const register = async (req, res, next) => {
     next(err);
   }
 };
+
 export const login = async (req, res, next) => {
   try {
-    // find one user, because its a unique user
+    // find one user from db, because its a unique user,
+    //by this user, we can get its other info by user.xxxxxx
     const user = await User.findOne({ username: req.body.username });
 
     if (!user) return next(createError(404, "User not found!"));
@@ -45,10 +47,9 @@ export const login = async (req, res, next) => {
 
     //prevent sending password in response object, get password outside of the object
     const { password, ...info } = user._doc; //prevent res inside _doc field
-    res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-      })
+    // access and change data only using http requests
+    
+    res.cookie("accessToken", token, { httpOnly: true,})
       .status(200)
       .send(info);
   } catch (err) {
