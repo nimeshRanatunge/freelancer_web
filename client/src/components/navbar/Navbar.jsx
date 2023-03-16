@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import newRequest from "../../utils/newRequest";
 import "./Navbar.scss";
 
 function Navbar() {
@@ -21,11 +22,26 @@ function Navbar() {
 
   // const currentUser = null
 
-  const currentUser = {
-    id: 1,
-    username: "Anna",
-    isSeller: false,
-  };
+  // const currentUser = {
+  //   id: 1,
+  //   username: "Anna",
+  //   isSeller: false,
+  // };
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const navigate = useNavigate();
+
+  const handleLogout = async()=>{
+    try{
+      await newRequest.post("/auth/logout");
+      localStorage.setItem("currentUser", null);
+      navigate("/");
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     // not in homepage (pathname!=="/") , navbar is going to active (white) always active==true or pathname NOT EQUAL TO /
@@ -50,8 +66,8 @@ function Navbar() {
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img
-                src="https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
+                src={currentUser.img || "/img/down.png"}
+                alt="x"
               />
               <span>{currentUser?.username}</span>
               {open && (
@@ -72,7 +88,7 @@ function Navbar() {
                   <Link className="link" to="/messages">
                     Messages
                   </Link>
-                  <Link className="link" to="/">
+                  <Link className="link" onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>

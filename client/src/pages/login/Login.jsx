@@ -7,7 +7,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-
+//comes from react-router-dom
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,7 +22,7 @@ function Login() {
       navigate("/")
     } catch (err) {
       setError(err.response.data);
-      console.log(err.response.data);
+      console.log(JSON.stringify(res.data));
     }
   };
 
