@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
-import { gigs } from "../../data";
 import GigCard from "../../components/gigCard/GigCard";
+import { useQuery } from "react-query";
+import newRequest from "../../utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 function Gigs() {
   const [sort, setSort] = useState("sales");
@@ -10,24 +12,45 @@ function Gigs() {
   const minRef = useRef();
   const maxRef = useRef();
 
+  const {search} = useLocation();
+  //const location = useLocation();
+  console.log(location)
+  // url in browser = http://localhost:5173/gigs?cat=design
+  // Objecthash: ""key: "default"pathname: "/gigs"search: "?cat=design"state: null[[Prototype]]: Object
+
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["gigs"],
+    queryFn: () => 
+      newRequest.get(`/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`).then((res) => {
+        return res.data;
+      }),
+      // dont use {} in queryFn, it will not working
+      //${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
+  });
+  console.log(data);
+
   const reSort = (type) => {
     setSort(type);
     setOpen(false);
   };
 
-  const apply = ()=>{
-    console.log(minRef.current.value)
-    console.log(maxRef.current.value)
-  }
+  useEffect(()=>{
+    refetch();
+  }, [sort])
+
+  const apply = () => {
+    refetch()
+  };
 
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">SKILL WORLD {">"} Graphics & Design {">"}</span>
+        <span className="breadcrumbs">
+          SKILL WORLD {">"} Graphics & Design {">"}
+        </span>
         <h1>AI Artists</h1>
-        <p>
-          Explore the boundaries of art and technology with SW's AI artists
-        </p>
+        <p>Explore the boundaries of art and technology with SW's AI artists</p>
         <div className="menu">
           <div className="left">
             <span>Budget</span>
@@ -35,6 +58,7 @@ function Gigs() {
             <input ref={maxRef} type="number" placeholder="max" />
             <button onClick={apply}>Apply</button>
           </div>
+
           <div className="right">
             <span className="sortBy">Sort by</span>
 
@@ -48,19 +72,21 @@ function Gigs() {
               <div className="rightMenu">
                 {sort === "sales" ? (
                   <span onClick={() => reSort("createdAt")}>Newest</span>
+                  // maaru krla tyene, sales(best Selling) eka uda tyeddi menu eke tyene anith eka createdAt(newest)
                 ) : (
                   <span onClick={() => reSort("sales")}>Best Selling</span>
-                  )}
-                  <span onClick={() => reSort("sales")}>Popular</span>
+                )}
+               
               </div>
             )}
-            
           </div>
         </div>
         <div className="cards">
-          {gigs.map((gig) => (
-            <GigCard key={gig.id} item={gig} />
-          ))}
+          {isLoading
+            ? "loading"
+            : error
+            ? "Something went wrong"
+            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>
     </div>

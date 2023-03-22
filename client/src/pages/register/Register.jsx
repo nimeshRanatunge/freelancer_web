@@ -3,6 +3,7 @@ import upload from "../../utils/upload.js";
 import "./Register.scss";
 import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
+//import axios from "axios";
 
 function Register() {
   const [file, setFile] = useState(null);
@@ -35,7 +36,6 @@ function Register() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const url = await upload(file);
     console.log("url is " + url);
     try {
@@ -43,7 +43,17 @@ function Register() {
         ...user,
         img: url,
       });
-      navigate("/")
+      // await axios.post(
+      //   "http://localhost:8800/api/auth/register",
+      //   {
+      //     ...user,
+      //     img: url,
+      //   },
+      //   {
+      //     withCredentials: true,
+      //   }
+      //);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
