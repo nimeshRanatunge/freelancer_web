@@ -131,10 +131,7 @@ function Gig() {
                   </div>
                   <hr />
                   <p>
-                    My name is Anna, I enjoy creating AI generated art in my
-                    spare time. I have a lot of experience using the AI program
-                    and that means I know what to prompt the AI with to get a
-                    great and incredibly detailed result.
+                    {dataUser.desc}
                   </p>
                 </div>
               </div>
