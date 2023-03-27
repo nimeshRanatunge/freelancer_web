@@ -1,7 +1,7 @@
 import createError from "../utils/createError.js";
 import Review from "../models/review.model.js";
 import Gig from "../models/gig.model.js";
-
+// in es modules importig it requires .js, in commo ones .js is not necessary
 export const createReview = async (req, res, next) => {
   if (req.isSeller)
     return next(createError(403, "Sellers can't create a review!"));
@@ -29,6 +29,7 @@ export const createReview = async (req, res, next) => {
     const savedReview = await newReview.save();
 
     await Gig.findByIdAndUpdate(req.body.gigId, {
+      // increment + (not replacing existing data, this will add data)
       $inc: { totalStars: req.body.star, starNumber: 1 },
     });
     res.status(201).send(savedReview);

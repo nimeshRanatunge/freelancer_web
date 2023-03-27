@@ -1,11 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import React from "react";
 import newRequest from "../../utils/newRequest";
 import Review from "../review/Review";
 import "./Reviews.scss";
 const Reviews = ({ gigId }) => {
-
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
     queryKey: ["reviews"],
     queryFn: () =>
@@ -14,13 +13,15 @@ const Reviews = ({ gigId }) => {
       }),
   });
 
+  //react query usemutation hook to create post requests
   const mutation = useMutation({
     mutationFn: (review) => {
       return newRequest.post("/reviews", review);
     },
-    onSuccess:()=>{
-      queryClient.invalidateQueries(["reviews"])
-    }
+    // after posting update review list again
+    onSuccess: () => {
+      queryClient.invalidateQueries(["reviews"]);
+    },
   });
 
   const handleSubmit = (e) => {
@@ -33,12 +34,14 @@ const Reviews = ({ gigId }) => {
   return (
     <div className="reviews">
       <h2>Reviews</h2>
+      {/* loading existing reviews */}
       {isLoading
         ? "loading"
         : error
         ? "Something went wrong!"
         : data.map((review) => <Review key={review._id} review={review} />)}
       <div className="add">
+        {/* add new review */}
         <h3>Add a review</h3>
         <form action="" className="addForm" onSubmit={handleSubmit}>
           <input type="text" placeholder="write your opinion" />

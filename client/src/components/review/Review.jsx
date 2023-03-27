@@ -1,18 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import React from "react";
 import newRequest from "../../utils/newRequest";
 import "./Review.scss";
-const Review = ({ review }) => {
-  const { isLoading, error, data } = useQuery(
-    {
-      queryKey: [review.userId],
-      queryFn: () =>
-        newRequest.get(`/users/${review.userId}`).then((res) => {
-          return res.data;
-        }),
-    },
-  );
 
+const Review = ({ review }) => {
+  // get details of the user that posted that review
+  const { isLoading, error, data } = useQuery({
+    queryKey: [review.userId],
+    queryFn: () =>
+      newRequest.get(`/users/${review.userId}`).then((res) => {
+        return res.data;
+      }),
+  });
 
   return (
     <div className="review">
@@ -21,16 +20,18 @@ const Review = ({ review }) => {
       ) : error ? (
         "error"
       ) : (
+        // review owner's details bar
         <div className="user">
           <img className="pp" src={data.img || "/img/noavatar.jpg"} alt="" />
           <div className="info">
             <span>{data.username}</span>
             <div className="country">
-              <span>{data.country}</span>
+              <span>x{data.country}</span>
             </div>
           </div>
         </div>
       )}
+      {/* stars */}
       <div className="stars">
         {Array(review.star)
           .fill()
@@ -39,6 +40,7 @@ const Review = ({ review }) => {
           ))}
         <span>{review.star}</span>
       </div>
+      {/* review literal */}
       <p>{review.desc}</p>
       <div className="helpful">
         <span>Helpful?</span>
