@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Messages.scss";
+// to working with time eg: 1 hour ago etc
 import moment from "moment";
 
 const Messages = () => {
