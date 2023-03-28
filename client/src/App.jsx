@@ -14,6 +14,9 @@ import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import Pay from "./pages/pay/Pay";
+import Success from "./pages/success/Success";
+
 
 const queryClient = new QueryClient();
 
@@ -77,6 +80,14 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/pay/:id",
+      element: <Pay />,
+    },
+    {
+      path: "/success",
+      element: <Success />,
     },
   ]);
 
