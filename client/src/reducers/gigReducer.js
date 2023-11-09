@@ -1,22 +1,27 @@
 export const INITIAL_STATE = {
   userId: JSON.parse(localStorage.getItem("currentUser"))?._id,
   title: "",
-  cat: "",
+  cat_main: "awrudu",
+  cat: "kewm",
   cover: "",
+  phone: 0,
   images: [],
-  desc: "",
+  desc: "I will make my foods in best quality using best strategies",
   shortTitle: "",
   shortDesc: "",
   deliveryTime: 0,
   revisionNumber: 0,
+  // infinite features with add button
   features: [],
   price: 0,
 };
 
+//using gigReducer we gonna update state that initialized above
 export const gigReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE_INPUT":
       return {
+        // update state
         ...state,
         [action.payload.name]: action.payload.value,
       };
@@ -28,11 +33,14 @@ export const gigReducer = (state, action) => {
       };
     case "ADD_FEATURE":
       return {
+        // keep all exept these one
+        // also keep previous features
         ...state,
         features: [...state.features, action.payload],
       };
     case "REMOVE_FEATURE":
       return {
+        // keep all except one that we want to delete
         ...state,
         features: state.features.filter(
           (feature) => feature !== action.payload

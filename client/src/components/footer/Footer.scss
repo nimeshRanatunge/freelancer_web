@@ -54,7 +54,9 @@
         display: flex;
         align-items: center;
         gap: 30px;
-
+        .accept{
+          width: 80px;
+        }
         .social {
           display: flex;
           gap: 20px;

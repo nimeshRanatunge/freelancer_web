@@ -13,8 +13,8 @@ function Gigs() {
   const maxRef = useRef();
 
   const {search} = useLocation();
-  //const location = useLocation();
-  console.log(location)
+  const location = useLocation();
+  //console.log(location)
   // url in browser = http://localhost:5173/gigs?cat=design
   // Objecthash: ""key: "default"pathname: "/gigs"search: "?cat=design"state: null[[Prototype]]: Object
 
@@ -28,28 +28,33 @@ function Gigs() {
       // dont use {} in queryFn, it will not working
       //${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
   });
-  console.log(data);
+  
 
   const reSort = (type) => {
     setSort(type);
     setOpen(false);
   };
 
+  //regular expression for remove first 20 or 5 charactors of the string given
+  let inputString = location.search;
+  let breadcrumbsText = inputString.includes("cat_main=")?inputString.replace(/^.{10}/, ''):inputString.replace(/^.{5}/, '');
+
   useEffect(()=>{
     refetch();
   }, [sort])
 
+  
   const apply = () => {
     refetch()
   };
-
+//console.log(data)
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">
-          SKILL WORLD {">"} Graphics & Design {">"}
-        </span>
-        <h1>AI Artists</h1>
+      <span className="breadcrumbs">
+              helarasaya {">"} {breadcrumbsText}{" >"}
+            </span>
+        <h1>{breadcrumbsText}</h1>
         <p>Explore the boundaries of art and technology with SW's AI artists</p>
         <div className="menu">
           <div className="left">
@@ -82,6 +87,7 @@ function Gigs() {
           </div>
         </div>
         <div className="cards">
+          {data==0?"No items yet":""}
           {isLoading
             ? "loading"
             : error

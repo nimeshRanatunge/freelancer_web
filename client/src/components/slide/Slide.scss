@@ -2,10 +2,15 @@
   display: flex;
   justify-content: center;
   padding: 100px 0px;
-  
+
   .container {
     width: 1400px;
     position: relative;
+
+    h1{
+      color: #555;
+      margin-bottom: 15px;
+    }
   }
 
   .carousel-initialized {

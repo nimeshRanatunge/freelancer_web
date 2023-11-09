@@ -43,7 +43,7 @@ function Gig() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              Liverr {">"} Graphics & Design{">"}
+              helarasaya {">"} {data.cat}{" >"} Item
             </span>
             <h1>{data.title}</h1>
             {isLoadingUser ? (
@@ -110,33 +110,10 @@ function Gig() {
                         </span>
                       </div>
                     )}
-                    <button>Contact Me</button>
+                    <button>Contact Me{":  0"+data.phone}</button>
                   </div>
                 </div>
                 <div className="box">
-                  <div className="items">
-                    <div className="item">
-                      <span className="title">From</span>
-                      <span className="desc">USA</span>
-                    </div>
-                    <div className="item">
-                      <span className="title">Member since</span>
-                      <span className="desc">Aug 2022</span>
-                    </div>
-                    <div className="item">
-                      <span className="title">Avg. response time</span>
-                      <span className="desc">4 hours</span>
-                    </div>
-                    <div className="item">
-                      <span className="title">Last delivery</span>
-                      <span className="desc">1 day</span>
-                    </div>
-                    <div className="item">
-                      <span className="title">Languages</span>
-                      <span className="desc">English</span>
-                    </div>
-                  </div>
-                  <hr />
                   <p>{dataUser.desc}</p>
                 </div>
               </div>
@@ -146,7 +123,7 @@ function Gig() {
           <div className="right">
             <div className="price">
               <h3>{data.shortTitle}</h3>
-              <h2>{data.price}</h2>
+              <h2>LKR {data.price}</h2>
             </div>
             <p>{data.shortDesc}</p>
             <div className="details">
@@ -155,8 +132,8 @@ function Gig() {
                 <span>{data.deliveryTime} Days Delivery</span>
               </div>
               <div className="item">
-                <img src="/img/recycle.png" alt="" />
-                <span>{data.revisionNumber} Revisions</span>
+                <img src="/img/free.svg" alt="" className="free"/>
+                <span>{data.revisionNumber} Items</span>
               </div>
             </div>
             <div className="features">

@@ -39,12 +39,24 @@
 
         button {
           border: none;
-          padding: 20px;
+          padding: 10px 20px;
           color: white;
           font-weight: 500;
           font-size: 18px;
-          background-color: #1dbf73;
+          background-color: rgb(121, 78, 78);
           cursor: pointer;
+          border-radius: 10px;
+          margin-left: 5px;
+          position: relative;
+        }
+        .close_main{
+          padding-right: 40px;
+          margin-bottom: 5px;
+          .close{
+            width: 20px;
+            position: absolute;
+            right: 10px;
+          }
         }
       }
     }

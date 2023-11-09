@@ -8,7 +8,7 @@ import moment from "moment";
 
 const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+  
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -18,7 +18,8 @@ const Messages = () => {
         return res.data;
       }),
   });
-
+  console.log(currentUser);
+  console.log(data);
   const mutation = useMutation({
     mutationFn: (id) => {
       return newRequest.put(`/conversations/${id}`);
@@ -32,6 +33,7 @@ const Messages = () => {
     mutation.mutate(id);
   };
 
+
   return (
     <div className="messages">
       {isLoading ? (
@@ -44,18 +46,22 @@ const Messages = () => {
             <h1>Messages</h1>
           </div>
           <table>
-            <tr>
-              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
-              <th>Last Message</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+                <th>Last Message</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
             {data.map((c) => (
               <tr
                 className={
-                  ((currentUser.isSeller && !c.readBySeller) ||
-                    (!currentUser.isSeller && !c.readByBuyer)) &&
-                  "active"
+                  (currentUser.isSeller && !c.readBySeller) ||
+                  (!currentUser.isSeller && !c.readByBuyer)
+                    ? "active"
+                    : "notActive"
                 }
                 key={c.id}
               >
@@ -76,6 +82,10 @@ const Messages = () => {
                 </td>
               </tr>
             ))}
+            </tbody>
+            <tfoot>
+             
+            </tfoot>
           </table>
         </div>
       )}

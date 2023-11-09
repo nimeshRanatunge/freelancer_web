@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Orders.scss";
 import { useQuery } from "react-query";
 import newRequest from "../../utils/newRequest";
@@ -7,6 +7,7 @@ import newRequest from "../../utils/newRequest";
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+  const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
@@ -14,6 +15,7 @@ const Orders = () => {
         return res.data;
       }),
   });
+
   const handleContact = async (order) => {
     const sellerId = order.sellerId;
     const buyerId = order.buyerId;

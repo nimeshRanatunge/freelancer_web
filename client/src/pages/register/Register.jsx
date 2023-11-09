@@ -12,7 +12,7 @@ function Register() {
     email: "",
     password: "",
     img: "",
-    country: "",
+    // country: "",
     isSeller: false,
     desc: "",
   });
@@ -82,13 +82,14 @@ function Register() {
           <label htmlFor="">Profile Picture</label>
           {/* upload 1 st image [0] */}
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          <label htmlFor="">Country</label>
+          {/* <label htmlFor="">Country</label>
           <input
             name="country"
             type="text"
-            placeholder="Usa"
+            placeholder="SL"
             onChange={handleChange}
-          />
+          /> */}
+          <br/>
           <button type="submit">Register</button>
         </div>
         <div className="right">

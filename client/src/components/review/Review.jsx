@@ -25,9 +25,9 @@ const Review = ({ review }) => {
           <img className="pp" src={data.img || "/img/noavatar.jpg"} alt="" />
           <div className="info">
             <span>{data.username}</span>
-            <div className="country">
+            {/* <div className="country">
               <span>x{data.country}</span>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
@@ -42,13 +42,13 @@ const Review = ({ review }) => {
       </div>
       {/* review literal */}
       <p>{review.desc}</p>
-      <div className="helpful">
+      {/* <div className="helpful">
         <span>Helpful?</span>
         <img src="/img/like.png" alt="" />
         <span>Yes</span>
         <img src="/img/dislike.png" alt="" />
         <span>No</span>
-      </div>
+      </div> */}
     </div>
   );
 };

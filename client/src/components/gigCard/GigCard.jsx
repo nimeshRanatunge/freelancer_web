@@ -14,9 +14,12 @@ const GigCard = ({ item }) => {
     // dont use {} in queryFn, it will not working
     //${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
   });
+  //console.log(data);
+  //console.log(item.shortTitle);
   return (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
+        <h2 className="item_title">{item.shortTitle}</h2>
         <img src={item.cover} alt="" />
         <div className="info">
           {isLoading ? (
@@ -44,13 +47,14 @@ const GigCard = ({ item }) => {
           <div className="price">
             <span>STARTING AT</span>
             <h2>
-              $ {item.price}
-              <sup>99</sup>
+              LKR {item.price}
+              <sup>.00</sup>
             </h2>
           </div>
         </div>
       </div>
     </Link>
+    
   );
 };
 

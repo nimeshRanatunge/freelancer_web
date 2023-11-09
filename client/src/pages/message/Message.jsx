@@ -7,7 +7,7 @@ import "./Message.scss";
 const Message = () => {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+  console.log(currentUser);
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -26,7 +26,7 @@ const Message = () => {
       queryClient.invalidateQueries(["messages"]);
     },
   });
-
+  console.log(currentUser);
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate({
@@ -40,7 +40,7 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link> > John Doe >
+          <Link to="/messages">Messages</Link> {">"} {currentUser.username} {">"}
         </span>
         {isLoading ? (
           "loading"
@@ -51,7 +51,7 @@ const Message = () => {
             {data.map((m) => (
               <div className={m.userId === currentUser._id ? "owner item" : "item"} key={m._id}>
                 <img
-                  src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  src="https://res.cloudinary.com/nimesh96x/image/upload/v1699516954/fiverr/pngwing.com_3_fsyg6r.png"
                   alt=""
                 />
                 <p>{m.desc}</p>

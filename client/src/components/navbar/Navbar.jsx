@@ -32,6 +32,10 @@ function Navbar() {
 
   const navigate = useNavigate();
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const handleLogout = async()=>{
     try{
       await newRequest.post("/auth/logout");
@@ -49,17 +53,15 @@ function Navbar() {
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">SKILLED XYZ</span>
+            <span className="text">හෙළ<b className="rasa">රසය</b>.lk</span>
           </Link>
-          <span className="dot">.</span>
+          {/* <span className="dot">.</span> */}
         </div>
         <div className="links">
-          <span>SW Business</span>
-          <span>Explore</span>
-          <span>English</span>
-
-          {/* //check whether logged user is a seller */}
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          <span>How it works</span>
+          <span>About us</span>
+          <span>Contact us</span>
+          <Link to="/login" className="link">How to cook</Link>
 
           {/* //not appear until register as a seller or client
           //if not a registered user, signin and join button will appear as 2nd arg */}
@@ -109,34 +111,28 @@ function Navbar() {
         // react fragments when using multiple comps
         <>
           <hr />
-          <div className="menu">
-            <Link className="link menuLink" to="/">
-              Graphics & Design
+          <div className="menu" onClick={refreshPage}>
+            <Link className="link menuLink" to="/gigs?cat_main=awrudu">
+              Awrudu Foods (අවුරුදු ආහාර)
             </Link>
-            <Link className="link menuLink" to="/">
-              Video & Animation
+            <Link className="link menuLink" to="/gigs?cat_main=general">
+              General Foods (සාමාන්‍ය ආහාර)
             </Link>
-            <Link className="link menuLink" to="/">
-              Writing & Translation
+            <Link className="link menuLink" to="/gigs?cat_main=rice">
+              Local Rice (දේශීය සහල්)
             </Link>
-            <Link className="link menuLink" to="/">
-              AI Services
+            <Link className="link menuLink" to="/gigs?cat_main=spices">
+              Spices (දේශීය කුළුබඩු)
             </Link>
-            <Link className="link menuLink" to="/">
-              Digital Marketing
+            <Link className="link menuLink" to="/gigs?cat_main=curry">
+              Local Curry (දේශීය ව්‍යංජන)
             </Link>
-            <Link className="link menuLink" to="/">
-              Music & Audio
-            </Link>
-            <Link className="link menuLink" to="/">
-              Programming & Tech
-            </Link>
-            <Link className="link menuLink" to="/">
-              Business
-            </Link>
-            <Link className="link menuLink" to="/">
-              Lifestyle
-            </Link>
+            <Link className="link menuLink" to="/gigs?cat_main=drinks">
+             Local Drinks (දේශීය පාන)
+            </Link> 
+            <Link className="link menuLink" to="/gigs?cat_main=sweets">
+             Local Sweets (දේශීය රසකැවිලි)
+            </Link> 
           </div>
           <hr />
         </>

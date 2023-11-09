@@ -1,0 +1,36 @@
+Awrudu::::::::::::::::
+kewn
+kokis
+kiribath
+aluwa
+asmi
+awrudu_other
+
+rasakewili:::::::::::::::::
+dodol
+buundi
+masket
+kiritoffee
+rasakewili_other
+
+
+local rice foods:::::::::::::::::
+suwandel
+heenati
+Maa-Wee
+Kuruluthuda
+local_rice_other
+
+local curry:::::::::::::::::
+hathmaaluwa
+achcharu
+local_curry_other
+
+local drinks:::::::::::::::::
+kenda
+koopi
+tea
+drinks_other
+
+
+

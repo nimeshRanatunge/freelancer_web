@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Featured.scss";
 import { useNavigate } from "react-router-dom";
+const images = [
+  "./img/asmix.png",
+  "./img/man.png",
+  "./img/kirix.png",
+];
 
 function Featured() {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 6500); // Change image every 5 seconds (adjust as needed)
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = () => {
     navigate(`/gigs?search=${input}`);
@@ -14,14 +28,16 @@ function Featured() {
       <div className="container">
         <div className="left">
           <h1>
-            Find the perfect <span>freelance</span> services for your business
+            Find the best <span>traditional foods</span> for your needs at{" "}
+            <span>helarasaya.lk</span>
           </h1>
+          <br/>
           <div className="search">
             <div className="searchInput">
               <img src="./img/search.png" alt="" />
               <input
                 type="text"
-                placeholder='Try "building mobil app"'
+                placeholder='Try "kiribath"'
                 onChange={(e) => setInput(e.target.value)}
               />
             </div>
@@ -29,14 +45,20 @@ function Featured() {
           </div>
           <div className="popular">
             <span>Popular:</span>
-            <button>Web Design</button>
-            <button>WordPress</button>
-            <button>Logo Design</button>
-            <button>AI Services</button>
+            <button>Kewm (කැවුම්)</button>
+            <button>Aasmi (ආස්මි)</button>
+            <button>Kokis (කොකිස්)</button>
+            <button>Idi aappa (ඉදි ආප්ප)</button>
           </div>
         </div>
         <div className="right">
-          <img src="./img/man.png" alt="" />
+          <div className="landing-page">
+            <img
+              src={images[currentImageIndex]}
+              alt={`Image ${currentImageIndex + 1}`}
+              className="image-transition"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -44,4 +66,3 @@ function Featured() {
 }
 
 export default Featured;
-

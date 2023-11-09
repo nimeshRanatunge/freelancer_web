@@ -23,6 +23,14 @@ const GigSchema = new Schema(
       type: Number,
       default: 0,
     },
+    phone: {
+      type: Number,
+      default: 0,
+    },
+    cat_main: {
+      type: String,
+      required: true,
+    },
     cat: {
       type: String,
       required: true,

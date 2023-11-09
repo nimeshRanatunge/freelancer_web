@@ -1,13 +1,13 @@
+
 import Gig from "../models/gig.model.js";
 import createError from "../utils/createError.js";
 
-// create gig
 export const createGig = async (req, res, next) => {
   if (!req.isSeller)
     return next(createError(403, "Only sellers can create a gig!"));
 
   const newGig = new Gig({
-    userId: req.userId, //from jwt
+    userId: req.userId,
     ...req.body,
   });
 
@@ -18,8 +18,6 @@ export const createGig = async (req, res, next) => {
     next(err);
   }
 };
-
-//delete gig
 export const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
@@ -32,8 +30,6 @@ export const deleteGig = async (req, res, next) => {
     next(err);
   }
 };
-
-//get one gig
 export const getGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
@@ -43,14 +39,12 @@ export const getGig = async (req, res, next) => {
     next(err);
   }
 };
-
-//all gis by filtering and min max prices limitations
-//and also we filter them by vategory in welcome page slider
 export const getGigs = async (req, res, next) => {
   const q = req.query;
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.cat && { cat: q.cat }),
+    ...(q.cat_main && { cat_main: q.cat_main }),
     ...((q.min || q.max) && {
       price: {
         ...(q.min && { $gt: q.min }),
@@ -59,7 +53,6 @@ export const getGigs = async (req, res, next) => {
     }),
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
   };
-  // by changing q.sort we can sort using differernt aspects eg: price, created at
   try {
     const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
     res.status(200).send(gigs);
@@ -67,4 +60,3 @@ export const getGigs = async (req, res, next) => {
     next(err);
   }
 };
-

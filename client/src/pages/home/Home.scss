@@ -28,7 +28,7 @@
       }
 
       button {
-        background-color: yellowgreen;
+        background-color: rgb(43, 190, 10);
         border: none;
         color: white;
         padding: 10px 20px;
@@ -101,7 +101,7 @@
   .explore {
     display: flex;
     justify-content: center;
-    padding: 100px 0px;
+    padding: 40px 0px;
 
     .container {
       width: 1400px;
@@ -114,11 +114,11 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+        
 
         .item {
-          width: 250px;
-          height: 150px;
+          width: 200px;
+          height: 200px;
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -146,7 +146,7 @@
           &:hover{
             .line{
               width: 80px;
-              background-color: yellowgreen;
+              background-color: rgb(103, 10, 190);
             }
           }
         }

@@ -1,12 +1,14 @@
 .gig {
   display: flex;
   justify-content: center;
+ 
 
   .container {
     width: 1400px;
     padding: 30px 0px;
     display: flex;
     gap: 50px;
+    margin-bottom: 200px !important;
 
     .left {
       flex: 2;
@@ -50,6 +52,8 @@
             height: 14px;
             width: 14px;
           }
+
+         
 
           span {
             font-size: 14px;
@@ -263,7 +267,10 @@
           display: flex;
           align-items: center;
           gap: 10px;
-
+          .free{
+            height: 50px !important;
+            width: 50px !important;
+          }
           img {
             width: 20px;
           }
@@ -286,7 +293,7 @@
       }
 
       button{
-        background-color: #1dbf73;
+        background-color: rgb(121, 78, 78);
         padding: 10px;
         color: white;
         font-weight: 500;
